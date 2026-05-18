@@ -1,0 +1,15 @@
+{
+  "claims": [],
+  "validationLogs": [
+    {
+      "cedula": "40213206564",
+      "timestamp": "2026-05-18T21:10:09.282Z",
+      "valid": false
+    },
+    {
+      "cedula": "40219735111",
+      "timestamp": "2026-05-18T21:10:52.773Z",
+      "valid": true
+    }
+  ]
+}

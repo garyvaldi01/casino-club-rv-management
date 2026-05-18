@@ -1,0 +1,6 @@
+{
+  "name": "Casino Club RV Management System",
+  "description": "Administrative dashboard and gift management platform for Casino Club RV, featuring campaign generation, customer tracking, and automated promotional flows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
