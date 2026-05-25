@@ -71,18 +71,23 @@ const getPrize = (min: number, max: number) => {
 
 // API routes
 app.post('/api/validate-cedula', (req, res) => {
-    const { cedula } = req.body;
-    const user = users[cedula];
+    const rawCedula = String(req.body.cedula || '').trim();
+    const cleanCedula = rawCedula.replace(/[-.\s]/g, '');
     
-    validationLogs.push({ cedula, timestamp: new Date().toISOString(), valid: !!user });
+    // Check if the user exists either by clean cedula or raw cedula
+    const userKey = Object.keys(users).find(k => String(k).replace(/[-.\s]/g, '') === cleanCedula);
+    const user = userKey ? users[userKey] : null;
+    const finalCedula = userKey || rawCedula;
+    
+    validationLogs.push({ cedula: finalCedula, timestamp: new Date().toISOString(), valid: !!user });
     
     if (user) {
         let prize;
-        if (generatedPrizes[cedula]) {
-            prize = generatedPrizes[cedula].prize;
+        if (generatedPrizes[finalCedula]) {
+            prize = generatedPrizes[finalCedula].prize;
         } else {
             prize = getPrize(user.min, user.max);
-            generatedPrizes[cedula] = {
+            generatedPrizes[finalCedula] = {
                 name: user.name,
                 prize,
                 timestamp: new Date().toISOString()
