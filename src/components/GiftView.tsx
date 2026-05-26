@@ -153,11 +153,47 @@ export default function GiftView() {
           )}
 
           {step === 'spinning' && (
-             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center justify-center py-10">
-                <motion.div animate={{ rotate: 360 }} transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }} className="w-32 h-32 border-8 border-amber-500 rounded-full border-t-transparent shadow-lg flex items-center justify-center">
-                    <span className="text-2xl font-black text-neutral-900">RD${spinningPrize}</span>
+             <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                exit={{ opacity: 0, scale: 0.8 }} 
+                className="flex flex-col items-center justify-center py-12 relative"
+             >
+                <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }} 
+                    transition={{ duration: 2, repeat: Infinity }} 
+                    className="absolute w-48 h-48 bg-amber-500/20 rounded-full blur-2xl pointer-events-none" 
+                />
+                
+                <div className="relative w-40 h-40 flex items-center justify-center mb-8">
+                    <motion.div 
+                        animate={{ rotate: 360 }} 
+                        transition={{ duration: 0.3, repeat: Infinity, ease: "linear" }} 
+                        className="absolute inset-0 rounded-full border-[12px] border-amber-200/30 border-t-amber-500 border-r-amber-600 shadow-[0_0_30px_rgba(245,158,11,0.5)]"
+                    />
+                    <motion.div 
+                        animate={{ rotate: -360 }} 
+                        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }} 
+                        className="absolute inset-2 rounded-full border-8 border-dashed border-amber-400/50"
+                    />
+                    <div className="absolute inset-4 bg-gradient-to-br from-neutral-900 to-neutral-800 rounded-full flex items-center justify-center shadow-inner border border-neutral-700 z-10">
+                        <span className="text-3xl font-black text-amber-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                            RD${spinningPrize}
+                        </span>
+                    </div>
+                </div>
+
+                <motion.div 
+                    animate={{ y: [0, -5, 0] }} 
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="flex items-center gap-2"
+                >
+                    <Sparkles className="text-amber-500 w-6 h-6 animate-pulse" />
+                    <p className="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-400 font-black text-2xl tracking-widest uppercase drop-shadow-sm">
+                        Girando...
+                    </p>
+                    <Sparkles className="text-amber-500 w-6 h-6 animate-pulse" />
                 </motion.div>
-                <p className="text-neutral-900 mt-8 font-bold text-xl animate-pulse tracking-widest uppercase">Girando...</p>
              </motion.div>
           )}
 
@@ -187,8 +223,8 @@ export default function GiftView() {
                 <CheckCircle className="text-green-600" size={60} />
               </div>
               <h1 className="text-3xl font-extrabold text-neutral-900 mb-2">¡LO TIENES, {prizeInfo.name}!</h1>
-              <p className="text-neutral-600 mb-2">Tu premio en efectivo es:</p>
-              <div className="text-5xl font-black text-red-700 mb-8 p-4 bg-red-100 rounded-2xl border-4 border-dashed border-red-300">
+              <p className="text-neutral-600 mb-2 font-bold text-lg">Tu Bono en crédito es:</p>
+              <div className="text-5xl font-black text-red-700 mb-8 p-4 bg-red-100 rounded-2xl border-4 border-dashed border-red-300 shadow-xl">
                 RD${prizeInfo.prize.toLocaleString()}
               </div>
               <a 
